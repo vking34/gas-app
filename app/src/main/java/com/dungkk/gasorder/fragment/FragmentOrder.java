@@ -117,7 +117,7 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
             ward = bundle.getString("ward");
             lat = bundle.getDouble("lat");
             lng = bundle.getDouble("lng");
-            Log.e(TAG, "address: "+address);
+            Log.e(TAG, "address: "+address + ", lat: "+ lat + ", lng: " + lng);
             ac_address.setText(address + ", " + ward);
         }
 

@@ -27,7 +27,8 @@ import org.json.JSONObject;
 
 public class FragmentProfile extends Fragment{
 
-    TextView name;
+    private TextView name;
+    private final static String url = "http://192.168.1.2/profile";
 
     @Nullable
     @Override
@@ -44,9 +45,7 @@ public class FragmentProfile extends Fragment{
             e.printStackTrace();
         }
 
-        String url = "http://192.168.1.2/profile";
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, userJson,
                 new Response.Listener<JSONObject>() {

@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     EditText pass;
     Button login, signup;
     TextView guest;
+    private final static String url = "http://192.168.1.2/login";
     private static final int REQUEST_CODE = 0x11;
     private String json = Environment.getExternalStorageDirectory() + File.separator + "Gas";
 
@@ -110,7 +111,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     e.printStackTrace();
                 }
 
-                String url = "http://192.168.1.2/login";
                 RequestQueue requestQueue = Volley.newRequestQueue(this);
 
 

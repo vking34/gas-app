@@ -37,27 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initView();
         Log.e("MainAcitivy", "receiving location object...");
-//        Bundle bundle = getIntent().getExtras();
-//
-//        if(bundle != null) {
-//
-//            location loc = (location) bundle.getParcelable("location");
-//            if(loc != null)
-//            {
-//                FragmentOrder fragmentOrder = new FragmentOrder();
-//                Bundle bundle1 = new Bundle();
-//                bundle.putParcelable("com.dungkk.gasorder.passingObjects.location", loc);
-//                fragmentOrder.setArguments(bundle1);
-//                replaceFragment(fragmentOrder);
-//
-//            }
-//            else {
-//                replaceFragment(new FragmentMain());
-//            }
-//        }
-//        else {
-//            replaceFragment(new FragmentMain());
-//        }
 
         Intent currentIntent = getIntent();
 
@@ -68,11 +47,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Double lat = currentIntent.getDoubleExtra("lat",21.0084982);
             Double lng = currentIntent.getDoubleExtra("lng", 105.8386711);
             String ward = currentIntent.getStringExtra("ward");
-            Log.e("Passing", "address: "+ addr + "lat: " + lat);
+            Log.e("Passing", "address: "+ addr + ", lat: " + lat);
             FragmentOrder fragmentOrder = new FragmentOrder();
             Bundle bundle = new Bundle();
-            bundle.putDouble("lat", 21.0084982);
-            bundle.putDouble("lng", 105.8386711);
+            bundle.putDouble("lat", lat);
+            bundle.putDouble("lng", lng);
             bundle.putString("address", addr);
             bundle.putString("ward", ward);
             fragmentOrder.setArguments(bundle);
