@@ -153,6 +153,7 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
                         gasCode = 100200;
                         break;
                 }
+
                 try {
                     order.put("gasCode", gasCode);
                     order.put("address", et_details.getText() + ", " + address);

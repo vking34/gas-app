@@ -21,9 +21,11 @@ import com.dungkk.gasorder.fragment.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+
     private FragmentManager manager;
     private  FragmentTransaction transaction;
 
@@ -58,13 +60,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
 
         Intent currentIntent = getIntent();
-        Double lat = currentIntent.getDoubleExtra("lat",21.0084982);
-        Double lng = currentIntent.getDoubleExtra("lng", 105.8386711);
+
         String addr = currentIntent.getStringExtra("address");
-        String ward = currentIntent.getStringExtra("ward");
 
         if(addr != null)
         {
+            Double lat = currentIntent.getDoubleExtra("lat",21.0084982);
+            Double lng = currentIntent.getDoubleExtra("lng", 105.8386711);
+            String ward = currentIntent.getStringExtra("ward");
             Log.e("Passing", "address: "+ addr + "lat: " + lat);
             FragmentOrder fragmentOrder = new FragmentOrder();
             Bundle bundle = new Bundle();
@@ -152,9 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_login:
 
-//                replaceFragment(new FragmentLogin());
-
-                Intent intent = new Intent(this, signin.class);
+                Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
                 
                 break;
@@ -164,8 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -39,13 +39,6 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
         </activity>
-        <activity
-                android:name=".signin"
-                android:parentActivityName=".MainActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".MainActivity"/>
-        </activity>
         <activity android:name=".SignUp"/>
         <activity android:name=".Activity_Map">
         </activity>
