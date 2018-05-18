@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:background="@color/white"
+        android:hint="Username"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/img_logo"
+        android:id="@+id/firstname"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <EditText
+        android:background="@color/white"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/firstname"
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <EditText
+        android:background="@color/white"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/password"
+        android:id="@+id/confirmpassword"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <EditText
+        android:background="@color/white"
+        android:hint="Age"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/confirmpassword"
+        android:id="@+id/age"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <Button
+        android:id="@+id/bt_signup"
+        android:layout_width="123dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/age"
+        android:layout_centerHorizontal="true"
+        android:text="Sign Up"
+        android:textSize="18dp"/>
+
+
+
+</RelativeLayout>

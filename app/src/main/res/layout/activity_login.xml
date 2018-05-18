@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/cover1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_margin="65dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/img_logo"
+        android:src="@drawable/logo"/>
+
+    <EditText
+        android:background="@color/white"
+        android:hint="Username"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/img_logo"
+        android:id="@+id/firstname"
+        android:layout_width="match_parent"
+        android:layout_height="38dp" />
+
+    <EditText
+        android:background="@color/white"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/firstname"
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="38dp" />
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="123dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/password"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Sign In"
+        android:textSize="18dp"/>
+
+    <Button
+        android:id="@+id/bt_signup"
+        android:layout_width="123dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/bt_login"
+        android:layout_marginEnd="36dp"
+        android:text="Sign UP"
+        android:textSize="18dp" />
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@+id/bt_login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:id="@+id/guest"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line"
+        android:text="Sign In As Guest"/>
+    <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize" android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" android:id="@+id/bar_login"/>
+
+</RelativeLayout>

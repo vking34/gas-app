@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">GasOrder</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">ORDER GAS DEVICES</string>
+    <string name="nav_header_subtitle">group3_SE@ictk60</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="gasCode_prompt">12 Kg Petrolimex Cylinder (325.000 VND)</string>
+
+    <string-array name="gasCode">
+        <item>12 Kg Petrolimex Cylinder (325.000 VND)</item>
+        <item>2 Kg Petrolimex Cylinder (70.000VND)</item>
+        <item>48 Kg Petrolimex Cylinder (1.150.000 VND)</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="150dp" app:srcCompat="@android:color/holo_red_light"
+            android:layout_marginTop="79dp" android:id="@+id/ibtn_order"
+            android:layout_alignParentTop="true" android:layout_alignParentStart="true"/>
+    <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="150dp" app:srcCompat="@android:color/holo_green_dark"
+            android:id="@+id/ibtn_products"
+            android:layout_below="@+id/ibtn_order" android:layout_alignParentStart="true"/>
+    <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="150dp" app:srcCompat="@android:color/holo_blue_bright"
+            android:id="@+id/ibtn_tips"
+            android:layout_below="@+id/ibtn_products" android:layout_alignParentStart="true"/>
+
+    <TextView
+            android:text="Products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_products"
+            android:textSize="15pt"
+            android:textColor="@color/black"
+            android:layout_below="@+id/ibtn_order" android:layout_centerHorizontal="true"
+            android:layout_marginTop="47dp"/>
+    <TextView
+            android:text="Order Gas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15pt"
+            android:textColor="@color/black"
+            android:layout_marginBottom="41dp" android:id="@+id/tv_order"
+            android:layout_above="@+id/tv_products" android:layout_centerHorizontal="true"/>
+    <TextView
+            android:text="Tips for using and safety"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12pt"
+            android:textColor="@color/black"
+            android:id="@+id/textView8"
+            android:layout_marginBottom="55dp" android:layout_alignBottom="@+id/ibtn_tips"
+            android:layout_centerHorizontal="true"/>
+</RelativeLayout>

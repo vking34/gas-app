@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="46dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.119"
+            android:elevation="10dp"
+            android:background="@drawable/white_border"
+            android:id="@+id/relLayout0" app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+        <Spinner
+                android:id="@+id/sp_gasCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/gasCode"
+                android:prompt="@string/gasCode_prompt"
+
+        />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/relLayout0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.081"
+            android:elevation="10dp"
+            android:background="@drawable/white_border"
+            android:id="@+id/relLayout1" app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:id="@+id/ac_address"
+                android:background="@null"
+                android:hint="Enter Address"
+                android:imeOptions="actionSearch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/relLayout1" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintHorizontal_bias="0.028"
+            app:layout_constraintVertical_bias="0.017"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:elevation="10dp"
+            android:id="@+id/relLayoutBtn"
+    >
+        <Button android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="GPS"
+                android:id="@+id/btn_gps"
+        />
+
+        <Button android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="115dp"
+                android:text="open map"
+                android:id="@+id/btn_openMap"
+        />
+
+        <Button android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="255dp"
+                android:text="CLEAR"
+                android:id="@+id/btn_clear"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/relLayoutBtn" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.104"
+            android:elevation="10dp"
+            android:id="@+id/relLayoutDetails"
+            app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent">
+        <EditText android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:hint="More details"
+                  android:id="@+id/et_details"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+
+            app:layout_constraintTop_toBottomOf="@id/relLayoutDetails" android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.141"
+            android:layout_marginLeft="16dp"
+            android:elevation="10dp"
+            android:background="@drawable/white_border"
+            android:id="@+id/relLayout2" app:layout_constraintLeft_toLeftOf="parent">
+
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="11"
+                android:hint="Phone Number"
+                tools:layout_editor_absoluteY="209dp" tools:layout_editor_absoluteX="16dp"
+                android:id="@+id/et_phoneNumber"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toBottomOf="@id/relLayout2" android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/relLayout3" app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" app:srcCompat="@android:color/holo_red_light"
+                android:id="@+id/ibtn_order"
+                android:layout_alignParentTop="true" android:layout_alignParentStart="true"/>
+        <TextView
+                android:text="Order Now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12pt"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp" android:id="@+id/tv_order"
+                android:layout_above="@+id/tv_products" android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
