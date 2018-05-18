@@ -1,7 +1,9 @@
 package com.dungkk.gasorder.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.*;
@@ -65,6 +67,9 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
     private Double lat;
     private Double lng;
     private int gasCode;
+    private String details;
+    private StringBuffer gasType;
+    private String phoneNumber;
 
     //widgets
     private AutoCompleteTextView ac_address;
@@ -142,23 +147,30 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
             public void onClick(View v) {
                 JSONObject order = new JSONObject();
                 JSONObject pos = new JSONObject();
+                gasType = new StringBuffer();
                 switch (String.valueOf(sp_gasCode.getSelectedItem())){
                     case "12 Kg Petrolimex Cylinder (325.000 VND)":
                         gasCode = 100000;
+                        gasType.append("12 Kg Petrolimex Cylinder (325.000 VND)");
                         break;
                     case "2 Kg Petrolimex Cylinder (70.000VND)":
                         gasCode = 100100;
+                        gasType.append("2 Kg Petrolimex Cylinder (70.000VND)");
                         break;
                     case "48 Kg Petrolimex Cylinder (1.150.000 VND)":
                         gasCode = 100200;
+                        gasType.append("48 Kg Petrolimex Cylinder (1.150.000 VND)");
                         break;
                 }
 
                 try {
+
                     order.put("gasCode", gasCode);
-                    order.put("address", et_details.getText() + ", " + address);
+                    details = et_details.getText().toString();
+                    order.put("address",  details + ", " + address);
                     order.put("ward", ward);
-                    order.put("phoneNumber", et_phoneNumber.getText());
+                    phoneNumber = et_phoneNumber.getText().toString();
+                    order.put("phoneNumber", phoneNumber);
                     pos.put("lat", lat);
                     pos.put("lng", lng);
                     order.put("pos", pos);
@@ -174,13 +186,47 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
                             public void onResponse(JSONObject response) {
 
                                 try {
+
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                                    StringBuffer mess = new StringBuffer();
+
                                     if(response.getBoolean("status")){
                                         Toast.makeText(getContext(), "Success", Toast.LENGTH_LONG).show();
-                                        replaceFragment(new FragmentMain());
+
+                                        // set title
+                                        alertDialogBuilder.setTitle("Successful Order");
+
+                                        // set content message in the dialog
+                                        mess.append("You just ordered ").append(gasType.toString()).append(" at\n").append(details).append(", ").append(address).append(", ").append("\nWe will call you back at ").append(phoneNumber);
+                                        alertDialogBuilder.setMessage(mess).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                replaceFragment(new FragmentMain());
+                                            }
+                                        });
+
+
                                     }
                                     else {
-                                        Toast.makeText(getContext(), "Invalid input/Sorry Your location is not in our service scope.", Toast.LENGTH_LONG).show();
+
+                                        alertDialogBuilder.setTitle("Error");
+                                        mess.append("Invalid input / Sorry, Your location is out of our service scope.");
+                                        alertDialogBuilder.setMessage(mess).setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+//                                        Toast.makeText(getContext(), "Invalid input/Sorry Your location is not in our service scope.", Toast.LENGTH_LONG).show();
                                     }
+
+                                    // create alert dialog from alerDialogBuilder
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                                    // show dialog
+                                    alertDialog.show();
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
