@@ -1,9 +1,9 @@
-package com.dungkk.gasorder;
+package com.dungkk.gasorder.passingObjects;
 
 public class User {
     private String firstName;
     private String lastName;
-    private static String username;
+    private static String username = null;
     private String password;
     private String phoneNumber;
     private String email;

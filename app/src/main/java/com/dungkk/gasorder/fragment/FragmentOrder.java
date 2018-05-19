@@ -27,34 +27,28 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.dungkk.gasorder.Login;
-import com.dungkk.gasorder.MapActivity;
+import com.dungkk.gasorder.signActivities.MapActivity;
 import com.dungkk.gasorder.R;
-import com.dungkk.gasorder.User;
 import com.dungkk.gasorder.extensions.PlaceAutocompleteAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import android.support.v4.app.FragmentManager;
 import com.dungkk.gasorder.passingObjects.location;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.dungkk.gasorder.passingObjects.coordinate;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.dungkk.gasorder.extensions.customOnItemSelectedListener;
 
 public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnectionFailedListener, LocationListener, AdapterView.OnItemSelectedListener {
 
@@ -187,6 +181,7 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
 
                                 try {
 
+                                    // create a alterDialog Builder
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
                                     StringBuffer mess = new StringBuffer();
 
@@ -205,12 +200,11 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
                                             }
                                         });
 
-
                                     }
                                     else {
 
                                         alertDialogBuilder.setTitle("Error");
-                                        mess.append("Invalid input / Sorry, Your location is out of our service scope.");
+                                        mess.append("Invalid input / Opps, Sorry, Your location is out of our service scope.");
                                         alertDialogBuilder.setMessage(mess).setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {

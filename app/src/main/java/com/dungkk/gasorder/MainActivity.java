@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,16 +14,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.dungkk.gasorder.passingObjects.location;
-import android.widget.ImageButton;
+import android.widget.Toast;
 import com.dungkk.gasorder.fragment.*;
+import com.dungkk.gasorder.passingObjects.User;
+import com.dungkk.gasorder.signActivities.SignIn;
+import com.dungkk.gasorder.signActivities.SignUp;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
 
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+
+    private MenuItem nav_main;
+    private MenuItem nav_profile;
+    private MenuItem nav_history;
+    private MenuItem nav_signin;
+    private MenuItem nav_signup;
+    private MenuItem nav_signout;
 
     private FragmentManager manager;
     private  FragmentTransaction transaction;
@@ -74,6 +81,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        Menu menu = navigationView.getMenu();
+
+        nav_main = menu.findItem(R.id.nav_main);
+        nav_profile = menu.findItem(R.id.nav_profile);
+        nav_history = menu.findItem(R.id.nav_history);
+        nav_signin = menu.findItem(R.id.nav_signin);
+        nav_signup = menu.findItem(R.id.nav_signup);
+        nav_signout = menu.findItem(R.id.nav_signout);
+
+        if(User.getUsername() != null){
+            nav_signin.setVisible(false);
+            nav_signup.setVisible(false);
+        }
+        else {
+            nav_profile.setVisible(false);
+            nav_history.setVisible(false);
+            nav_signout.setVisible(false);
+        }
+
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -126,20 +153,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_main:
                 replaceFragment(new FragmentMain());
                 break;
+
             case R.id.nav_profile:
                 replaceFragment(new FragmentProfile());
                 break;
+
             case R.id.nav_history:
                 replaceFragment(new FragmentHistory());
                 break;
-            case R.id.nav_login:
 
-                Intent intent = new Intent(this, Login.class);
+            case R.id.nav_signin:
+                Intent intent = new Intent(this, SignIn.class);
                 startActivity(intent);
-                
                 break;
+
+            case R.id.nav_signup:
+                Intent intent1 = new Intent(this, SignUp.class);
+                startActivity(intent1);
+                break;
+
+            case R.id.nav_signout:
+                User.setUsername(null);
+                Toast.makeText(MainActivity.this, "Signed Out", Toast.LENGTH_LONG).show();
+                Intent intent2 = new Intent(this, MainActivity.class);
+                startActivity(intent2);
+                break;
+
             case R.id.nav_share:
                 break;
+
             case R.id.nav_feedback:
                 break;
         }

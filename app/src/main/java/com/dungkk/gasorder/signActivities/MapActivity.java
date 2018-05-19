@@ -1,6 +1,5 @@
-package com.dungkk.gasorder;
+package com.dungkk.gasorder.signActivities;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,27 +8,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
+import com.dungkk.gasorder.MainActivity;
+import com.dungkk.gasorder.R;
 import com.dungkk.gasorder.extensions.PlaceAutocompleteAdapter;
-import com.dungkk.gasorder.fragment.FragmentOrder;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
@@ -42,16 +38,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import android.support.v4.app.FragmentManager;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.dungkk.gasorder.passingObjects.location;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -98,10 +88,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
-        mGps = (ImageView) findViewById(R.id.ic_gps);
-        clear_btn = (Button) findViewById(R.id.clear_btn);
+        setContentView(com.dungkk.gasorder.R.layout.activity_map);
+        mSearchText = (AutoCompleteTextView) findViewById(com.dungkk.gasorder.R.id.input_search);
+        mGps = (ImageView) findViewById(com.dungkk.gasorder.R.id.ic_gps);
+        clear_btn = (Button) findViewById(com.dungkk.gasorder.R.id.clear_btn);
         clear_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +100,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        ibtn_submit = (ImageButton) findViewById(R.id.ibtn_submit);
+        ibtn_submit = (ImageButton) findViewById(com.dungkk.gasorder.R.id.ibtn_submit);
         ibtn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

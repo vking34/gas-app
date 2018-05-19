@@ -15,7 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dungkk.gasorder.R;
-import com.dungkk.gasorder.User;
+import com.dungkk.gasorder.passingObjects.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 

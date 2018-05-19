@@ -1,6 +1,5 @@
 package com.dungkk.gasorder.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,10 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.dungkk.gasorder.Login;
-import com.dungkk.gasorder.MainActivity;
 import com.dungkk.gasorder.R;
-import com.dungkk.gasorder.User;
+import com.dungkk.gasorder.passingObjects.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;

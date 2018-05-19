@@ -1,5 +1,7 @@
-package com.dungkk.gasorder;
+package com.dungkk.gasorder.signActivities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Environment;
@@ -20,6 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.dungkk.gasorder.MainActivity;
+import com.dungkk.gasorder.R;
+import com.dungkk.gasorder.passingObjects.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,12 +32,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Login extends AppCompatActivity implements View.OnClickListener{
+public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
-    EditText user;
-    EditText pass;
-    Button login, signup;
-    TextView guest;
+    private EditText user;
+    private EditText pass;
+    private Button signin, signup;
+    private TextView tv_backHome;
     private final static String url = "http://192.168.1.2/login";
     private static final int REQUEST_CODE = 0x11;
     private String json = Environment.getExternalStorageDirectory() + File.separator + "Gas";
@@ -41,17 +46,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signin);
         requestPermision();
         user = (EditText) findViewById(R.id.firstname);
         pass = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.bt_login);
-        guest = (TextView) findViewById(R.id.guest);
+        signin = (Button) findViewById(R.id.bt_login);
+        tv_backHome = (TextView) findViewById(R.id.tv_backHome);
         signup = (Button) findViewById(R.id.bt_signup);
 
-        login.setOnClickListener(this);
+        signin.setOnClickListener(this);
         signup.setOnClickListener(this);
-        guest.setOnClickListener(this);
+        tv_backHome.setOnClickListener(this);
 
     };
 
@@ -97,11 +102,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_login:
+
                 final String username = user.getText().toString();
                 String password = pass.getText().toString();
-
-//                String s = "{\"login\":[{\"username\":\""+username+"\", \"password\":\""+password+"\"}]}";
-//                wirteJson("login.json", s);
 
                 JSONObject userJson = new JSONObject();
                 try {
@@ -118,18 +121,42 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Toast.makeText(Login.this, response.toString(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(SignIn.this, response.toString(), Toast.LENGTH_LONG).show();
                                 try {
                                     if(response.getBoolean("status")){
 
                                         User.setUsername(username);
-                                        Intent intent = new Intent(Login.this, MainActivity.class);
+                                        Toast.makeText(SignIn.this, "Signed In", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(SignIn.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();
 
                                     }
                                     else {
-                                        Toast.makeText(Login.this, "Error user or password", Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(SignIn.this, "Error user or password", Toast.LENGTH_LONG).show();
+
+                                        // create a alterDialog Builder
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignIn.this);
+                                        StringBuffer mess = new StringBuffer();
+
+                                        // set title
+                                        alertDialogBuilder.setTitle("Error");
+
+                                        // set content message in the dialog
+                                        mess.append("Username or password was wrong.\nPlease try again");
+                                        alertDialogBuilder.setMessage(mess).setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+                                        // create alert dialog from alert DialogBuilder
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                                        // show dialog
+                                        alertDialog.show();
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -140,7 +167,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(Login.this, "Error", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignIn.this, "Error", Toast.LENGTH_LONG).show();
                             }
                         }
                 );
@@ -154,7 +181,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 finish();
                 break;
 
-            case R.id.guest:
+            case R.id.tv_backHome:
                 Intent intent1 = new Intent(this, MainActivity.class);
                 startActivity(intent1);
                 finish();
