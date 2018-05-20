@@ -27,6 +27,7 @@ import com.dungkk.gasorder.R;
 import com.dungkk.gasorder.passingObjects.User;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.dungkk.gasorder.passingObjects.Server;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -34,14 +35,16 @@ import java.io.IOException;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
+    private final static String url =  Server.getAddress()+ "/login";
+    private static final int REQUEST_CODE = 0x11;
+
+    // widgets
     private EditText user;
     private EditText pass;
     private Button signin, signup;
     private TextView tv_backHome;
-    private final static String url = "http://192.168.1.2/login";
-    private static final int REQUEST_CODE = 0x11;
-    private String json = Environment.getExternalStorageDirectory() + File.separator + "Gas";
 
+    private String json = Environment.getExternalStorageDirectory() + File.separator + "Gas";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

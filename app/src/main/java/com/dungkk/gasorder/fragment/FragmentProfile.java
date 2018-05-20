@@ -18,20 +18,19 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dungkk.gasorder.R;
 import com.dungkk.gasorder.passingObjects.User;
-
+import com.dungkk.gasorder.passingObjects.Server;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FragmentProfile extends Fragment{
 
     private TextView name;
-    private final static String url = "http://192.168.1.2/profile";
+    private final static String url = Server.getAddress() + "/profile";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
 
         name = (TextView) view.findViewById(R.id.fullname);
 
@@ -42,7 +41,7 @@ public class FragmentProfile extends Fragment{
             e.printStackTrace();
         }
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, userJson,
                 new Response.Listener<JSONObject>() {

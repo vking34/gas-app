@@ -45,6 +45,7 @@ import android.support.v4.app.FragmentManager;
 import com.dungkk.gasorder.passingObjects.location;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.dungkk.gasorder.passingObjects.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,7 +84,8 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private final static String URL = "http://192.168.1.2/orderForm";
+    private static String URL = Server.getAddress() + "/orderForm";
+
     // vars
     private View view;
     private PlaceAutocompleteAdapter placeAutocompleteAdapter;

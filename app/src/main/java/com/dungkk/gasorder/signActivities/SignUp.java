@@ -27,10 +27,12 @@ import com.dungkk.gasorder.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.dungkk.gasorder.passingObjects.Server;
+
 public class SignUp extends AppCompatActivity {
 
     // static vars
-    private final static String URL = "http://192.168.1.2/signup";
+    private final static String URL = Server.getAddress() + "/signup";
 
     // Widgets
     private EditText et_firstName;
