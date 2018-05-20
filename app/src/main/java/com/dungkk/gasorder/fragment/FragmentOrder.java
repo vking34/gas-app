@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.dungkk.gasorder.passingObjects.User;
 import com.dungkk.gasorder.signActivities.MapActivity;
 import com.dungkk.gasorder.R;
 import com.dungkk.gasorder.extensions.PlaceAutocompleteAdapter;
@@ -50,9 +51,9 @@ import com.dungkk.gasorder.passingObjects.Server;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnectionFailedListener, LocationListener, AdapterView.OnItemSelectedListener {
-
 
     // returned vars
     private LatLng pos;
@@ -84,12 +85,15 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private static String URL = Server.getAddress() + "/orderForm";
+    private final static String URLgetLastOrder = Server.getAddress() + "/getLastOrder";
+    private final static String URL = Server.getAddress() + "/orderForm";
+    private RequestQueue requestQueue;
 
     // vars
     private View view;
     private PlaceAutocompleteAdapter placeAutocompleteAdapter;
     private Boolean locationPermissionsGranted = false;
+//    private Bundle lastOrderBundle;
 
     public LocationManager locationManager;
     public Criteria criteria;
@@ -109,6 +113,7 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
         et_phoneNumber = (EditText) view.findViewById(R.id.et_phoneNumber);
         sp_gasCode = (Spinner) view.findViewById(R.id.sp_gasCode);
 
+        requestQueue = Volley.newRequestQueue(view.getContext());
 
         Bundle bundle = this.getArguments();
 
@@ -121,11 +126,70 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
             Log.e(TAG, "address: "+address + ", lat: "+ lat + ", lng: " + lng);
             ac_address.setText(address + ", " + ward);
         }
+        else {
+            if(User.getUsername() != null)
+            {
+                Log.e(TAG, "getting the last order...");
+                JSONObject user =  new JSONObject();
+                try {
+                     user.put("username", User.getUsername());
+                     Log.e(TAG, "username: " + user.getString("username"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+//                RequestQueue rQueue = Volley.newRequestQueue(view.getContext());
+                JsonObjectRequest lastOrderRequest = new JsonObjectRequest(Request.Method.POST, URLgetLastOrder, user,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try
+                                {
+                                    if(response.getBoolean("status"))
+                                    {
+                                        phoneNumber = response.getString("phoneNumber");
+                                        Log.e(TAG, "phone number: " + phoneNumber);
+                                        et_phoneNumber.setText(phoneNumber);
+                                        address = response.getString("address");
+                                        ward = response.getString("ward");
+                                        ac_address.setText(address + ", " + ward);
+
+                                        lat = response.getJSONObject("pos").getDouble("lat");
+                                        lng = response.getJSONObject("pos").getDouble("lng");
+
+//                                        lastOrderBundle = new Bundle();
+//                                        lastOrderBundle.putDouble("lat", lat);
+//                                        lastOrderBundle.putDouble("lng", lng);
+//                                        lastOrderBundle.putString("address", address);
+//                                        lastOrderBundle.putString("ward", ward);
+
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e(TAG, "error");
+                            }
+                        }
+                );
+
+                requestQueue.add(lastOrderRequest);
+            }
+        }
 
         btn_openMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapActivity.class);
+//                if(lastOrderBundle != null)
+//                {
+//                    intent.putExtra("lastOrder", lastOrderBundle);
+//                }
                 startActivity(intent);
             }
         });
@@ -163,18 +227,28 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
 
                     order.put("gasCode", gasCode);
                     details = et_details.getText().toString();
-                    order.put("address",  details + ", " + address);
+                    if(details.trim().length() == 0)
+                    {
+                        order.put("address",address);
+                    } else {
+                        order.put("address",  details + ", " + address);
+                    }
                     order.put("ward", ward);
                     phoneNumber = et_phoneNumber.getText().toString();
                     order.put("phoneNumber", phoneNumber);
                     pos.put("lat", lat);
                     pos.put("lng", lng);
                     order.put("pos", pos);
+
+                    if(User.getUsername() != null)
+                    {
+                        order.put("username", User.getUsername());
+                    }
+
                     Log.e(TAG, "order: " + order.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, order,
                         new Response.Listener<JSONObject>() {
@@ -535,5 +609,21 @@ public class FragmentOrder extends Fragment implements GoogleApiClient.OnConnect
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         parent.getFirstVisiblePosition();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (GoogleApiClient != null)
+            GoogleApiClient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (GoogleApiClient != null && GoogleApiClient.isConnected()) {
+            GoogleApiClient.stopAutoManage(getActivity());
+            GoogleApiClient.disconnect();
+        }
     }
 }

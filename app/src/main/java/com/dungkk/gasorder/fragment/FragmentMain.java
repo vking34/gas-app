@@ -29,8 +29,6 @@ public class FragmentMain  extends Fragment{
         ibtn_products = (ImageButton) view.findViewById(R.id.ibtn_products);
         ibtn_tips = (ImageButton) view.findViewById(R.id.ibtn_tips);
 
-
-
         ibtn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
