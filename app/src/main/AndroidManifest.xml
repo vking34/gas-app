@@ -40,9 +40,12 @@
                     android:value=".MainActivity"/>
         </activity>
         <activity android:name=".signActivities.SignUp"/>
-        <activity android:name=".Activity_Map">
-        </activity>
+        <!-- <activity android:name=".Activity_Map"> -->
+        <!--  -->
+        <!-- </activity> -->
         <activity android:name=".signActivities.MapActivity">
+        </activity>
+        <activity android:name=".Manager">
         </activity>
     </application>
 

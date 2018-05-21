@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MenuItem nav_signin;
     private MenuItem nav_signup;
     private MenuItem nav_signout;
+    private MenuItem nav_manager;
 
     private FragmentManager manager;
     private  FragmentTransaction transaction;
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_signin = menu.findItem(R.id.nav_signin);
         nav_signup = menu.findItem(R.id.nav_signup);
         nav_signout = menu.findItem(R.id.nav_signout);
+//        nav_manager = menu.findItem(R.id.nav_manager);
 
         if(User.getUsername() != null){
             nav_signin.setVisible(false);
@@ -178,6 +180,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent2 = new Intent(this, MainActivity.class);
                 startActivity(intent2);
                 break;
+
+            case R.id.nav_manager:
+                Intent intent3 = new Intent(MainActivity.this, Manager.class);
+                startActivity(intent3);
 
             case R.id.nav_share:
                 break;
